@@ -3,11 +3,8 @@ package controllers
 import play.api._
 import play.api.mvc._
 
-object SignIn {
-  
-  def log(message: String) = {
-        System.out.println("MyLogger: " + message)
-		//Ok(views.html.index("Your new application is ready."))
-  }
-  
+object SignIn extends Controller {
+    def showLogin = Action {
+        Ok(views.html.login())
+    }
 }
