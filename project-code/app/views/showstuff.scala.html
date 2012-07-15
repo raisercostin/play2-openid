@@ -1,0 +1,11 @@
+@(user:ro.raisercostin.play.module.signin.User)
+
+@main("showstuff") {
+	@if(user==null){
+		@user is NOT logged in.
+	}else{
+		@user is logged in.
+	}
+	@login("Ia de logheaza-te - Sign-in"
+   		,"Do you already have an account on one of these sites? Click the logo to log in with it here")
+}
