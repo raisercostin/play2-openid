@@ -1,65 +1,28 @@
 package ro.raisercostin.play.module.signin
 
-import scala.collection.mutable.MutableList
-import org.squeryl.KeyedEntity
+//import scala.collection.mutable.MutableList
+import _root_.org.squeryl.KeyedEntity
+import _root_.org.squeryl.Schema
+import _root_.org.squeryl.Table
+import _root_.org.squeryl.dsl._
+import _root_.org.squeryl.dsl.ast._
+import _root_.org.squeryl.dsl.{OneToMany, CompositeKey2}
 
-case class Product(
-    id: Long,
-    ean: Long,
-    name: String,
-    description: String) extends KeyedEntity[Long]
-case class Warehouse(
-    id: Long,
-    name: String) extends KeyedEntity[Long]
-case class StockItem(
-    id: Long,
-    product: Long,
-    location: Long,
-    quantity: Long) extends KeyedEntity[Long]
-case class User(username: String) extends KeyedEntity[Long]
-case class Identity(email: String) extends KeyedEntity[Long]
-
-object User {
-    var users = Map[String, User]()
-
-    def authenticated(emails: java.util.List[_]): User = {
-        val emails2 = convert(emails)
-        for (email <- emails2) {
-            if (users.contains(email)) {
-                var user = users(email)
-                user = User(email, emails2)
-                for (email2 <- emails2) {
-                    users += email2 -> user
-                }
-                return user
-            }
+case class User2(id: Long, username: String) extends KeyedEntity[Long]
+case class Identity(id: Long, email: String) extends KeyedEntity[Long]
+object Database extends Schema {
+    val usersTable: Table[User2] =
+        table[User2]
+    val identitiesTable: Table[Identity] =
+        table[Identity]
+    on(usersTable) { p =>
+        declare {
+            p.id is(autoIncremented)
         }
-        val user = User(emails2(0), emails2)
-        users += user.id -> user
-        user
     }
-    def authenticated(identifier: Option[String]): User = {
-        if (!identifier.isEmpty) {
-            if (users.contains(identifier.get)) {
-                var user = users(identifier.get)
-                if (user != null) {
-                    return user
-                }
-            }
-            val user = User(identifier.get, List.empty)
-            users += user.id -> user
-            user
+    on(identitiesTable) { s =>
+        declare {
+            s.id is(autoIncremented)
         }
-        null
-    }
-
-    def convert(list: java.util.List[_]): List[String] = {
-        var result = List[String]()
-        import collection.JavaConversions._
-        for (obj <- list) {
-            val text = obj.asInstanceOf[String]
-            result ::= text
-        }
-        result
     }
 }

@@ -6,7 +6,7 @@ import play.api.db.DB
 import play.api.{Application, GlobalSettings}
 import org.squeryl.SessionFactory
 object Global extends GlobalSettings {
-	SessionFactory.concreteFactory = Some(() =>
-		Session.create(
-		     DB.getConnection()(app), new H2Adapter) 
-)
+    SessionFactory.concreteFactory = Some(() =>
+        Session.create(
+            DB.getConnection()(app), new H2Adapter))
+}
