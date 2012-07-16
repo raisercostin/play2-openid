@@ -17,7 +17,7 @@ object Database extends Schema {
         table[Identity]
     on(usersTable) { p =>
         declare {
-            p.id is(autoIncremented)
+            p.id. is(autoIncremented)
         }
     }
     on(identitiesTable) { s =>
