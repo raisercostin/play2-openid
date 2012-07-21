@@ -1,9 +1,16 @@
+# Extracted from https://github.com/ulrich/macaron-factory/blob/master/.gitignore
+# Ignore all dotfiles...
+.*
+# except for .gitignore
+!.gitignore
 
-/samples/signin-sample/.cache
-/samples/signin-sample/.classpath
-/samples/signin-sample/.project
-/samples/signin-sample/.settings
-/project-code/.project
-/project-code/.classpath
-/project-code/.settings
-/project-code/.cache
+# Ignore Play! working directory #
+db
+eclipse
+log
+logs
+precompiled
+tmp
+test-result
+eclipse
+server.pid
