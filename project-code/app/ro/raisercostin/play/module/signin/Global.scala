@@ -4,9 +4,10 @@ import org.squeryl.adapters.H2Adapter
 import org.squeryl.{Session, SessionFactory}
 import play.api.db.DB
 import play.api.{Application, GlobalSettings}
+import play.api.Play.current
 import org.squeryl.SessionFactory
 object Global extends GlobalSettings {
     SessionFactory.concreteFactory = Some(() =>
         Session.create(
-            DB.getConnection()(app), new H2Adapter))
+            DB.getConnection(), new H2Adapter))
 }

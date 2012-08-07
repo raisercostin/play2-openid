@@ -1,12 +1,16 @@
 package ro.raisercostin.play.module.signin
 
 //import scala.collection.mutable.MutableList
-import _root_.org.squeryl.KeyedEntity
-import _root_.org.squeryl.Schema
-import _root_.org.squeryl.Table
-import _root_.org.squeryl.dsl._
-import _root_.org.squeryl.dsl.ast._
-import _root_.org.squeryl.dsl.{OneToMany, CompositeKey2}
+//import _root_.org.squeryl.Table
+//import _root_.org.squeryl.dsl._
+//import _root_.org.squeryl.dsl.ast._
+//import _root_.org.squeryl.dsl.{OneToMany, CompositeKey2}
+import org.squeryl._//{ Schema, SessionFactory, Session, KeyedEntity }
+import org.squeryl.adapters.MySQLAdapter
+import org.squeryl.annotations.Column
+import org.squeryl.PrimitiveTypeMode._
+import java.sql.{ DriverManager }
+
 
 case class User2(id: Long, username: String) extends KeyedEntity[Long]
 case class Identity(id: Long, email: String) extends KeyedEntity[Long]
