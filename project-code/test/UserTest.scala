@@ -11,24 +11,23 @@ import play.api.test.Helpers._
 
 @RunWith(classOf[JUnitRunner])
 class HelloWorldSpec extends Specification {
-    //FakeApplication(additionalConfiguration = inMemoryDatabase())
+    val app = FakeApplication() //additionalConfiguration = inMemoryDatabase())
     "create users table" should {
         "create/drop table" in {
-            running(FakeApplication()) {
+            running(app) {
                 ro.raisercostin.play.module.signin.Global
                 transaction {
-                    Database.drop
-                    Database.create
+                    //Database.drop
+                    //Database.create
                     Database.printDdl
                     true
                 }
             }
         }
     }
-
     "A User" should {
         "be creatable" in {
-            running(FakeApplication(/*additionalConfiguration = inMemoryDatabase()*/)) {
+            running(app) {
                 transaction {
                     val user1 = Database.usersTable insert User2("name")
                     user1.id should not be equalTo(0)
