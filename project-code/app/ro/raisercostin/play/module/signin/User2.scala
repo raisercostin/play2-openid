@@ -12,8 +12,12 @@ import org.squeryl.PrimitiveTypeMode._
 import java.sql.{ DriverManager }
 
 
-case class User2(id: Long, username: String) extends KeyedEntity[Long]
-case class Identity(id: Long, email: String) extends KeyedEntity[Long]
+case class User2(username: String) extends KeyedEntity[Long]{
+    val id: Long = 0
+}
+case class Identity(email: String) extends KeyedEntity[Long]{
+    val id: Long = 0
+}
 object Database extends Schema {
     val usersTable: Table[User2] =
         table[User2]
